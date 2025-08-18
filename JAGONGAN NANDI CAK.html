@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Jagongan Nandi Iki</title>
+<style>
+  body {
+    background: #1a1a1a;
+    color: #fff;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .arrow {
+    font-size: 32px;
+    margin-bottom: 40px;
+    animation: bounce 1s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+  }
+
+  button:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(255, 77, 77, 0.8);
+  }
+
+  #result {
+    margin-top: 80px;
+    font-size: 40px;
+    min-height: 60px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 10px gold, 0 0 20px gold, 0 0 30px goldenrod;
+  }
+
+  .final-glow {
+    color: #fff;
+    text-shadow: 
+      0 0 15px gold, 
+      0 0 30px orange, 
+      0 0 50px goldenrod, 
+      0 0 70px gold;
+    animation: pulseGlow 1.5s infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from { text-shadow: 0 0 10px gold, 0 0 20px orange; }
+    to { text-shadow: 0 0 20px gold, 0 0 40px orange, 0 0 60px goldenrod; }
+  }
+
+  /* Coin rain style */
+  .coin {
+    position: absolute;
+    background: url('https://github.com/kurosecc-couy/cihuy/raw/main/money-coin-vector-icon-removebg-preview.png') no-repeat center/contain;
+    top: -60px;
+    opacity: 0.2;
+    animation: fall-spin linear infinite;
+    z-index: 1;
+  }
+
+  /* Jatuh + berputar */
+  @keyframes fall-spin {
+    from { transform: translateY(-60px) rotate(0deg); }
+    to { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<h1>JAGONGAN NANDI IKII</h1>
+<div class="arrow">⬇️</div>
+<button id="gachaBtn">PENCET EN LEK CEK DIACAK!</button>
+
+<div id="result"></div>
+
+<audio id="slotSfx" src="https://github.com/kurosecc-couy/cihuy/raw/main/Slot%20Machine%20Jackpot%20Sound%20Effect.mp3"></audio>
+
+<script>
+const options = [
+  {text: "OMAH E SLAMET", weight: 3},
+  {text: "CJDW GANKS", weight: 5},
+  {text: "BIAKSO PAK SWABAR!", weight: 2},
+  {text: "DHIMAS TEKNIK", weight: 1},
+  {text: "SUWANTOT ALL BASE!", weight: 3},
+  {text: "KABOL ISLIK", weight: 3}
+];
+
+const rainbowColors = ["#ff4d4d","#ffa64d","#ffff4d","#4dff4d","#4dffff","#4d4dff","#ff4dff"];
+
+// Fungsi random weighted
+function weightedRandom(options) {
+  let totalWeight = options.reduce((sum, o) => sum + o.weight, 0);
+  let rand = Math.random() * totalWeight;
+  for (let option of options) {
+    if (rand < option.weight) return option.text;
+    rand -= option.weight;
+  }
+}
+
+// Animasi slot
+function slotAnimation(finalResult) {
+  const resultDiv = document.getElementById('result');
+  const slotSfx = document.getElementById('slotSfx');
+  slotSfx.currentTime = 0;
+  slotSfx.play();
+
+  let duration = 5000; // 5 detik
+  let intervalTime = 100;
+  let iterations = duration / intervalTime;
+  let i = 0;
+
+  const interval = setInterval(() => {
+    const randomOption = options[Math.floor(Math.random() * options.length)].text;
+    const randomColor = rainbowColors[Math.floor(Math.random() * rainbowColors.length)];
+    resultDiv.style.color = randomColor;
+    resultDiv.classList.remove("final-glow");
+    resultDiv.textContent = randomOption;
+    i++;
+    if (i >= iterations) {
+      clearInterval(interval);
+      resultDiv.style.color = "white"; 
+      resultDiv.textContent = finalResult;
+      resultDiv.classList.add("final-glow");
+    }
+  }, intervalTime);
+}
+
+// Event tombol
+document.getElementById('gachaBtn').addEventListener('click', () => {
+  const finalResult = weightedRandom(options);
+  slotAnimation(finalResult);
+});
+
+// Generate hujan koin
+function createCoin() {
+  const coin = document.createElement("div");
+  coin.classList.add("coin");
+  document.body.appendChild(coin);
+
+  // Posisi horizontal acak
+  coin.style.left = Math.random() * 100 + "vw";
+
+  // Ukuran acak
+  const size = 20 + Math.random() * 30; // 20px – 50px
+  coin.style.width = size + "px";
+  coin.style.height = size + "px";
+
+  // Durasi jatuh acak
+  const duration = 3 + Math.random() * 4; // 3–7 detik
+  coin.style.animationDuration = duration + "s";
+
+  // Opacity acak
+  coin.style.opacity = 0.1 + Math.random() * 0.2;
+
+  // Hapus setelah jatuh
+  setTimeout(() => {
+    coin.remove();
+  }, duration * 1000);
+}
+
+// Spawn coin tiap 300ms
+setInterval(createCoin, 300);
+</script>
+
+</body>
+</html>
