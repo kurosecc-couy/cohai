@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEDES & CELENG Player</title>
+  <style>
+    :root {
+      --hover-glow: rgba(255,255,255,0.55);
+      --btn-bg: rgba(255,255,255,0.08);
+      --btn-bg-hover: rgba(255,255,255,0.15);
+      --btn-border: rgba(255,255,255,0.35);
+      --text: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      background-image: url("https://github.com/kurosecc-couy/cihuy/raw/main/WhatsApp%20Image%202025-08-11%20at%2011.13.33.jpeg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      transition: filter .5s ease;
+    }
+
+    .scrim {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.35));
+      pointer-events: none;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,.5);
+      font-size: clamp(20px, 3.2vw, 28px);
+    }
+
+    p.hint {
+      margin: 0 0 10px;
+      opacity: .85;
+      font-size: 0.95rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    button.btn {
+      appearance: none;
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      color: var(--text);
+      padding: 14px 22px;
+      font-size: clamp(16px, 2.4vw, 18px);
+      line-height: 1;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background .25s ease, box-shadow .25s ease, transform .06s ease;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      user-select: none;
+    }
+
+    button.btn:hover {
+      background: var(--btn-bg-hover);
+      box-shadow: 0 0 0 3px var(--hover-glow) inset,
+                  0 8px 24px rgba(255,255,255,0.18);
+    }
+
+    button.btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 0 0 3px var(--hover-glow) inset,
+                  0 4px 12px rgba(255,255,255,0.14);
+    }
+
+    .now-playing {
+      margin-top: 6px;
+      min-height: 1.4em;
+      opacity: .9;
+      font-size: .95rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+
+    button.btn:focus-visible {
+      outline: 3px solid rgba(255,255,255,.75);
+      outline-offset: 2px;
+    }
+
+    .btn-fire {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid orange;
+      background: rgba(255, 80, 0, 0.2);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-fire::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,140,0,0.7), transparent 70%);
+      animation: flames 1s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes flames {
+      0% { transform: translate(0,0) rotate(0deg); opacity: .7; }
+      50% { transform: translate(10px,-10px) rotate(90deg); opacity: .5; }
+      100% { transform: translate(0,0) rotate(180deg); opacity: .7; }
+    }
+
+    .btn-fire:hover { filter: grayscale(100%); }
+
+    /* Foto almarhum */
+    .almarhum {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid white;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      animation: floaty 6s ease-in-out infinite;
+      z-index: 2;
+      background: black;
+      text-align: center;
+    }
+
+    .almarhum img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .almarhum span {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 1px 3px black;
+    }
+
+    .almarhum.left { left: 20px; animation-delay: 0s; }
+    .almarhum.right { right: 20px; animation-delay: 3s; }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(-50%) translateY(0); }
+      50% { transform: translateY(-50%) translateY(-25px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <!-- Foto kiri -->
+  <div class="almarhum left">
+    <img src="https://github.com/kurosecc-couy/cihuy/raw/main/WhatsApp%20Image%202025-07-18%20at%2020.17.37.jpeg" alt="almarhum kiri">
+    <span>almarhum</span>
+  </div>
+
+  <!-- Foto kanan -->
+  <div class="almarhum right">
+    <img src="https://github.com/kurosecc-couy/cihuy/raw/main/WhatsApp%20Image%202025-07-25%20at%2018.39.43.jpeg" alt="almarhum kanan">
+    <span>almarhum</span>
+  </div>
+
+  <main class="wrap">
+    <h1>TOMBOL KOMUNIKASI INTELEJEN BAWOK</h1>
+    <p class="hint">Iso mencet pora,lek ga iso nemen cok.</p>
+
+    <div class="buttons">
+      <button class="btn" id="btn-bedes" type="button">BEDES</button>
+      <button class="btn" id="btn-celeng" type="button">CELENG</button>
+      <button class="btn btn-fire" id="btn-fire" type="button">🔥 WITO 🔥</button>
+    </div>
+
+    <div class="now-playing" id="nowPlaying" aria-live="polite"></div>
+
+    <audio id="audio-bedes" preload="auto" src="https://github.com/kurosecc-couy/cihuy/raw/main/WhatsApp%20Ptt%202025-08-18%20at%2007.14.44.ogg"></audio>
+    <audio id="audio-celeng" preload="auto" src="https://github.com/kurosecc-couy/cihuy/raw/main/WhatsApp%20Ptt%202025-08-16%20at%2018.55.30.ogg"></audio>
+    <video id="video-fire" preload="auto" src="https://github.com/kurosecc-couy/cihuy/raw/main/ssstik.io_1755476595564.mp4" style="display:none"></video>
+  </main>
+
+  <script>
+    const btnBedes = document.getElementById('btn-bedes');
+    const btnCeleng = document.getElementById('btn-celeng');
+    const btnFire = document.getElementById('btn-fire');
+
+    const audBedes = document.getElementById('audio-bedes');
+    const audCeleng = document.getElementById('audio-celeng');
+    const vidFire = document.getElementById('video-fire');
+
+    const nowPlaying = document.getElementById('nowPlaying');
+    const allAudios = [audBedes, audCeleng, vidFire];
+
+    function playExclusive(media, label) {
+      allAudios.forEach(m => {
+        if (m !== media) {
+          m.pause();
+          if (m.tagName === "VIDEO") m.currentTime = 0;
+          if (m.tagName === "AUDIO") m.currentTime = 0;
+        }
+      });
+
+      media.play().then(() => {
+        nowPlaying.textContent = `Memutar: ${label}`;
+      }).catch(err => {
+        console.warn('Playback gagal:', err);
+        nowPlaying.textContent = 'Tidak bisa memutar.';
+      });
+    }
+
+    btnBedes.addEventListener('click', () => playExclusive(audBedes, 'BEDES'));
+    btnCeleng.addEventListener('click', () => playExclusive(audCeleng, 'CELENG'));
+    btnFire.addEventListener('click', () => playExclusive(vidFire, 'SPESIAL 🔥'));
+
+    allAudios.forEach(m => {
+      m.addEventListener('ended', () => {
+        if (![...allAudios].some(x => !x.paused)) {
+          nowPlaying.textContent = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
