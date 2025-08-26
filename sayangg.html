@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy 1 Month, Sayang! 💖</title>
+  <meta name="description" content="Halaman HTML lucu untuk merayakan 1 bulan bareng pacar" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ffe6f1; --bg2:#e6f7ff; --card:#ffffffcc; --ink:#2b2b2b; --accent:#ff6fa9; --accent2:#6fbaff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink); font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 10% 10%, var(--bg1), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 20%, var(--bg2), transparent 60%),
+                  linear-gradient(180deg, #fff, #fff0);
+      overflow-x:hidden;
+    }
+    .wrap{min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px}
+    .card{
+      width:min(960px, 96vw); background:var(--card); backdrop-filter: blur(10px);
+      border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,.12); overflow:hidden; position:relative;
+    }
+    header{
+      padding:28px 24px 8px; text-align:center; position:relative;
+    }
+    .subtitle{font-size:.95rem; opacity:.75}
+    h1{margin:.2rem 0; font-size:clamp(28px, 5vw, 44px); color:#ff4b91; font-weight:800; letter-spacing:.3px}
+    h1 .script{font-family:"Caveat", cursive; font-weight:700; color:#ff2e76; font-size:1.15em}
+
+    .hero{
+      display:grid; gap:16px; grid-template-columns:1fr; padding:12px 16px 24px; text-align:center;
+    }
+    @media (min-width:760px){ .hero{grid-template-columns:1.2fr .8fr; text-align:left; align-items:center; padding:12px 24px 32px}}
+
+    .hero p{margin:8px 0 0; line-height:1.6}
+
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top:14px;
+    }
+    .btn{
+      border:none; padding:12px 18px; font-weight:700; border-radius:999px; cursor:pointer; transition:.2s transform, .3s box-shadow;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:linear-gradient(135deg, #ff6fa9, #ff2e76); color:#fff; box-shadow:0 10px 22px rgba(255,46,118,.35)}
+    .btn-ghost{background:#ffffffa6; border:2px solid #00000010}
+
+    .no-escape{position:relative}
+
+    .panel{
+      padding:18px 18px 24px; border-top:1px dashed #00000012; background:#fff9fb50;
+      display:grid; gap:16px; grid-template-columns:1fr; align-items:start;
+    }
+    @media (min-width:860px){ .panel{grid-template-columns:1fr 1fr}}
+
+    .section{background:#fff; border-radius:18px; padding:16px; box-shadow:0 10px 24px rgba(0,0,0,.05)}
+    .section h3{margin:.2rem 0 .2rem; font-size:1.05rem}
+    .section p{margin:.2rem 0 .4rem; font-size:.95rem}
+
+    .love-note{font-size:1rem; line-height:1.8}
+    .love-note b{background:linear-gradient(90deg,#ff6fa9,#6fbaff); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+    footer{padding:12px 18px 22px; text-align:center; font-size:.9rem; opacity:.7}
+
+    .heart{position:fixed; font-size:18px; animation:floatUp 5.2s linear forwards; pointer-events:none; filter:drop-shadow(0 6px 10px rgba(255,0,88,.25))}
+    @keyframes floatUp{0%{transform:translateY(0) scale(.6); opacity:0}8%{opacity:1} 92%{opacity:1} 100%{transform:translateY(-140vh) scale(1.2); opacity:0}}
+
+    .badge{display:inline-flex; align-items:center; gap:8px; background:#fff; padding:8px 12px; border-radius:999px; box-shadow:0 6px 18px rgba(0,0,0,.08); font-size:.92rem}
+
+    .count-box{display:grid; grid-template-columns:repeat(4,minmax(70px,1fr)); gap:8px}
+    .k{background:linear-gradient(180deg,#fff, #fff0); border:1.5px solid #00000010; border-radius:12px; padding:10px; text-align:center}
+    .k .n{font-weight:800; font-size:1.3rem}
+    .k .l{font-size:.8rem; opacity:.7}
+
+    .hidden{display:none !important}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="card">
+      <header>
+        <div class="subtitle">🎉 Anniversary Kita</div>
+        <h1><span class="script">Happy 1 Month</span>, Aliya Sayangg! 💞</h1>
+      </header>
+
+      <div class="hero">
+        <div>
+          <p>Terima kasih sudah jadi alasan senyumku sebulan terakhir. Boleh nggak… kita rayakan dengan <b>hal kecil ini?</b> dan <b>makan atau main roblox mungkin?</b>? 😘</p>
+          <div class="cta">
+            <button class="btn btn-primary" id="btnYes">Ya, ayo! 💗</button>
+            <button class="btn btn-ghost no-escape" id="btnNo">Enggak dulu 🙈</button>
+            <span class="badge">📅 Mulai jadian: <input id="startDate" type="date" value="2025-07-29" /></span>
+          </div>
+          <div style="margin-top:14px">
+            <div class="count-box" id="countBox">
+              <div class="k"><div class="n" id="d">0</div><div class="l">Hari</div></div>
+              <div class="k"><div class="n" id="h">0</div><div class="l">Jam</div></div>
+              <div class="k"><div class="n" id="m">0</div><div class="l">Menit</div></div>
+              <div class="k"><div class="n" id="s">0</div><div class="l">Detik</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section">
+            <h3>Awal deket 📸</h3>
+            <p>masih ga nyangka si dari iseng join voice jadi begini, cihuiii</p>
+            <img src="https://github.com/kurosecc-couy/cohai/raw/main/WhatsApp%20Image%202025-08-26%20at%2020.52.54.jpeg" alt="Awal deket" style="width:100%;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.15)">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="section">
+          <h3>Surat singkat buat kamu 💌</h3>
+          <p class="love-note" id="note">
+            Haiiii <b>Liyaaa</b> Sayangg,
+            makasiii sudah hadir dan bikin hariku lebih cerahh. Dalam 1 bulan ini, aku kecintaan banget anjir asal kamu tau ya, chat tengah malam, ngobrol malem2 (masio aku turu sek). Semoga hari-hari kita selalu <b>hangat, jujur, dan seru</b>. Lek kamu setuju, klik tombol <b>Ya</b> di atas—biar hujan hati turun sekarang jugaaa ☔️💗
+          </p>
+          <audio id="music" loop>
+            <source src="https://github.com/kurosecc-couy/cohai/raw/main/snaptik_7470755964090699013_v2.mp4" type="audio/mpeg" />
+          </audio>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:10px">
+            <button class="btn btn-primary" id="playMusic">Putar / Hentikan Musik 🎶</button>
+            <button class="btn btn-ghost" id="popHearts">Tuang Hati Lagi 💞</button>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Ngapain enaknya nichh</h3>
+          <p>Ceklist ide yang kamu mau malam ini:</p>
+          <ul style="list-style:none; padding-left:0; line-height:2">
+            <li><label><input type="checkbox"> Nobar film di discordd 🎬</label></li>
+            <li><label><input type="checkbox"> Makan bareng (tapi masak sek rek) 🍜</label></li>
+            <li><label><input type="checkbox"> Main robloksss 🕹️</label></li>
+            <li><label><input type="checkbox"> Alasan mau nerima satu sama lain? </label></li>
+            <li><label><input type="checkbox"> Tulis 3 hal yang kita syukuri ✍️</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        Dibuat dengan 💖 oleh kamu yang lagi senyum-senyum sendiri. — <span id="year"></span> 
+        (Maaf ya cuman bisa bikinin inii hehehe)
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const btnYes = document.getElementById('btnYes');
+    const btnNo  = document.getElementById('btnNo');
+    const startDate = document.getElementById('startDate');
+    const dEl = document.getElementById('d');
+    const hEl = document.getElementById('h');
+    const mEl = document.getElementById('m');
+    const sEl = document.getElementById('s');
+    const music = document.getElementById('music');
+    const playMusicBtn = document.getElementById('playMusic');
+    const popHeartsBtn = document.getElementById('popHearts');
+    const note = document.getElementById('note');
+    const year = document.getElementById('year');
+
+    year.textContent = new Date().getFullYear();
+
+    let timer;
+    function startCounter(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(()=>{
+        const start = new Date("2025-07-29");
+        const diff = Math.max(0, Date.now() - start.getTime());
+        const days = Math.floor(diff/ (24*60*60*1000));
+        const hours = Math.floor((diff/ (60*60*1000)) % 24);
+        const mins = Math.floor((diff/ (60*1000)) % 60);
+        const secs = Math.floor((diff/ 1000) % 60);
+        dEl.textContent = days; hEl.textContent = hours; mEl.textContent = mins; sEl.textContent = secs;
+      }, 1000);
+    }
+    startCounter();
+
+    function heartEmoji(){
+      const emojis = ['💖','💗','💘','💝','💞','💕','💓','❤️'];
+      return emojis[Math.floor(Math.random()*emojis.length)];
+    }
+
+    function spawnHeart(x,y){
+      const el = document.createElement('div');
+      el.className = 'heart';
+      el.textContent = heartEmoji();
+      const size = 16 + Math.random()*18;
+      el.style.fontSize = size + 'px';
+      el.style.left = (x - size/2) + 'px';
+      el.style.top  = (y - size/2) + 'px';
+      document.body.appendChild(el);
+      setTimeout(()=> el.remove(), 5200);
+    }
+
+    function burstHearts(q=24){
+      const { innerWidth:w, innerHeight:h } = window;
+      for(let i=0;i<q;i++){
+        const x = Math.random()*w; const y = h - 10;
+        setTimeout(()=> spawnHeart(x, y), i*40);
+      }
+    }
+
+    btnYes.addEventListener('click', ()=>{
+      burstHearts(48);
+      note.innerHTML = `Oke, deal! Malam ini kita rayakan versi kita sendiri. Terima kasih sudah memilih <b>Ya</b>. Kamu itu favoritku tiap hari. 💗`;
+      if(navigator.vibrate){ navigator.vibrate([30, 50, 30]); }
+    });
+
+    btnNo.addEventListener('mouseover', ()=>{
+      const b = btnNo.getBoundingClientRect();
+      const nx = (Math.random() * (window.innerWidth - b.width - 40));
+      const ny = (Math.random() * (window.innerHeight - b.height - 40));
+      btnNo.style.position = 'fixed';
+      btnNo.style.left = nx + 'px';
+      btnNo.style.top  = ny + 'px';
+    });
+
+    let playing = false;
+    playMusicBtn.addEventListener('click', async ()=>{
+      try{
+        if(!playing){ await music.play(); playing = true; playMusicBtn.textContent = 'Hentikan Musik 🎶'; }
+        else { music.pause(); playing = false; playMusicBtn.textContent = 'Putar Musik 🎶'; }
+      }catch(e){ alert('Musik belum bisa diputar.'); }
+    });
+
+    popHeartsBtn.addEventListener('click', ()=> burstHearts(36));
+
+    document.addEventListener('click', (e)=>{
+      spawnHeart(e.clientX, e.clientY);
+    });
+  </script>
+</body>
+</html>
